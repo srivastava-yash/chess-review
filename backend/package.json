@@ -1,0 +1,17 @@
+{
+  "name": "chess-review-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Yash Srivastava",
+  "license": "ISC",
+  "dependencies": {
+    "chess.js": "^1.0.0-beta.8",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "pgn-parser": "^2.2.0"
+  }
+}
