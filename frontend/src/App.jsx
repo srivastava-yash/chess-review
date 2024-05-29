@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Chess } from 'chess.js'
 import { Chessboard } from './components/Chessboard'
-import { Button } from './components/Button'
+import { Sidebar } from './components/Sidebar'
 
 function App() {
     const [chess, setChess] = useState(new Chess())
@@ -14,8 +14,8 @@ function App() {
                     <div className='col-span-4 w-full flex justify-center'>
                         <Chessboard board={board}/>
                     </div>
-                    <div className='col-span-2 bg-green-50 w-full'>
-                        <Button />
+                    <div className='col-span-2 bg-slate-800 w-full'>
+                        <Sidebar />
                     </div>
                 </div>
             </div>
