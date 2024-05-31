@@ -1,10 +1,18 @@
-import express from "express";
-import dotenv from "dotenv";
-dotenv.config();
+const express = require("express");
+require("dotenv").config();
+const cors=require("cors");
 
-import chessRouter from "./routes/chess.router";
+const corsOptions ={
+   origin:'*',
+   credentials:true,            //access-control-allow-credentials:true
+   optionSuccessStatus:200,
+}
+
+
+var chessRouter = require("./routes/chess.router.js");
 
 const app = express();
+app.use(cors(corsOptions))
 
 app.use(express.json());
 

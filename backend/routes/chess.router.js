@@ -1,9 +1,9 @@
-import { Router } from "express";
-import { Chess } from "chess.js";
-import pgnParser from "pgn-parser";
-import axios from "axios";
+const express = require("express");
+const Chess = require("chess.js");
+const pgnParser = require("pgn-parser");
+const axios = require("axios");
 
-const router = Router();
+const router = express.Router();
 
 router.post("/parse", async(req, res) => {
     let {pgn} = req.body;
@@ -65,6 +65,7 @@ router.post("/games", async (req, res) => {
     if(!username) {
         return res.status(400).json({'message': "Invalid Request"});
     }
+    console.log(`Fetching games for ${username}`);
 
     if(!year) {
         year = new Date().getFullYear();
@@ -80,10 +81,11 @@ router.post("/games", async (req, res) => {
     const url = `https://api.chess.com/pub/player/${username}/games/${year}/${month}`;
     try {
         let chessResponse = await axios.get(url);
-        games = chessResponse.games;
+        games = chessResponse.data.games;
+        return res.status(200).json(games.reverse());
     } catch (err) {
         return res.status(500).json({'message': "Internal Server Error fetching Chess.com games"});
     }
-
-    return res.status(200).json(games.reverse());
 });
+
+module.exports = router;
