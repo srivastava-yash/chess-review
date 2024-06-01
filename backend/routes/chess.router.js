@@ -1,5 +1,5 @@
 const express = require("express");
-const Chess = require("chess.js");
+const { Chess } = require("chess.js");
 const pgnParser = require("pgn-parser");
 const axios = require("axios");
 
@@ -75,6 +75,8 @@ router.post("/games", async (req, res) => {
         currentMonth = new Date().getMonth() + 1;
         month = currentMonth.toString();
         month = month.length > 1 ? month : "0"+month;
+        // remove later
+        month = "05";
     }
 
     let games;
@@ -82,7 +84,8 @@ router.post("/games", async (req, res) => {
     try {
         let chessResponse = await axios.get(url);
         games = chessResponse.data.games;
-        return res.status(200).json(games.reverse());
+        return res.status(200).json({
+            'games': games.reverse()});
     } catch (err) {
         return res.status(500).json({'message': "Internal Server Error fetching Chess.com games"});
     }
